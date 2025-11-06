@@ -1,6 +1,7 @@
 FROM php:8.4-cli-alpine
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions zip curl sockets pdo_pgsql intl pcntl opcache tzdata
+RUN apk add tzdata
+RUN install-php-extensions zip curl sockets pdo_pgsql intl pcntl opcache
 ARG RR_CONFIG=.rr.yaml
 ENV RR_CONFIG=$RR_CONFIG
 WORKDIR /app
